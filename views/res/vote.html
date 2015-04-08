@@ -1,0 +1,54 @@
+<html>
+<head>
+        <!-- Title -->
+        <title>ZettaNetwork - Vote</title>
+        <!-- /Title -->
+        
+        <!-- Meta Tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <!-- /Meta Tags -->
+        
+        <!-- JS -->
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- /JS -->
+        
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+        <!-- /CSS -->
+        
+    
+        
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+  var locations = ["http://bbc.co.uk", "http://bing.com", "http://minecraft-server-list.com/","http://xertol.me/breakmc", "thanks.html"];
+  var currentIndex = 0;
+  var len = locations.length;
+  $(document).ready(function(){
+    $(':button').click(function() {
+        currentIndex = this.value == "Next" ? 
+                currentIndex < len - 1 ? ++currentIndex : len - 1 : 
+                currentIndex > 0 ? --currentIndex : 0;
+        $('#frame').attr('src', locations[currentIndex]);
+    });
+  });
+</script>
+</head>
+<body style="background-color: #1B1B1B;">
+<a href="/">
+<input type = "button" class="btn btn-primary" value = "Home" style="margin-top: 10px; margin-left: 10px;">
+</a>
+<div style="margin-left: auto; margin-right: auto; text-align: center; margin-top: -3%;">
+<input type = "button" class="btn btn-primary" value = "Previous">  &nbsp;  <input type = "button" class="btn btn-primary" value = "Next">
+</div>
+<br />
+<div style="margin-left: auto; margin-right: auto; text-align: center;">
+<iframe id="frame" frameborder="0" allowtransparency="true" style="width: 96%; height: 87%; margin-left: auto; margin-right: auto; margin-top: -0.6%" src="http://bbc.co.uk"></iframe>
+</div>
+
+</body>
+</html>
