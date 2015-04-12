@@ -1,6 +1,6 @@
 <style type="text/css">
 .status {
-
+	font-size: 25;
 	color: #000;
 	padding-top: 110px;
     text-align: center;
@@ -18,18 +18,18 @@ img {
 	<center>
 	<img src="resources/image/ZettaNetworks-Header.png"><br>
     <a href="store.html"><img src="resources/image/Gabes-Store-Icon.png"></a>
-    <a href="/home"><img src="resources/image/enter.png"></a>
+    <a href="/stats"><img src="resources/image/enter.png"></a>
     <a href="vote.html"><img src="resources/image/Gabes-Vote-Icon.png"></a> <br>
     <h3><div class="status">Loading</h3></div></center>
 </div>
 
 <script>
 	$(function(){
-		$.get('https://eu.mc-api.net/v3/server/info/mcpvp.com', function( data ){
+		$.get('http://mcping.net/api/zettanetwork.net', function( data ){
 			if(data.error)
 				$(".status").html( '<font color="#8A0000"> Server offline.</font>' );
 			else {
-				$(".status").html( '<font color="##003103"> Server online! Version: ' + data.version.name +'</font> <br>' + 'Players online: ' + data.players.online + '/' + data.players.max );
+				$(".status").html('<font color="##003103"> Server online! Version: ' + data.version +'</font> <br>' + 'Players online: ' + data.online + '/' + data.max );
 			}
 		});
 	});

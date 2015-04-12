@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Zetta</title>
+        <!-- <link rel="stylesheet" type="text/css" href="https://bootswatch.com/darkly/bootstrap.min.css"> -->
+        <link rel="stylesheet" type="text/css" href="/css/stats.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+        <script src="jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script> 
+    </head>
+    <body>
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    
+                    <!--
+                        Sidebar logo
+                    -->
+                    <li class="sidebar-brand">
+                        <a href="#">
+                        <img src="resources/image/ZettaNetworks-Header.png" width="200px" style="padding-top: 23px;" class="center">
+                        </a>
+                    </li>
+                    
+                    <!--
+                        Sidebar links
+                    -->
+                    <li class="container center">
+                        <a href="/stats" style="padding-top: 30px;">
+                        <i class="fa fa-home"></i> <b>Dashboard</a>
+                    </li>
+                    <li class="container center">
+                        <a href="/forum"><i class="fa fa-paper-plane"></i> Forum</a>
+                    </li>
+                    <li class="container center">
+                        <a href="/soon"><i class="fa fa-bar-chart"></i> <b>Global Stats</a>
+                    </li>
+                    <li class="container center">
+                        <a href="/login"><i class="fa fa-users"></i> <b>Login</a>
+                    </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
+            
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                {{{body}}}
+            </div>
+        </body>
+    </html>

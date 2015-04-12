@@ -1,0 +1,46 @@
+            <!-- 
+                Menu button 
+            -->
+            <div id="page-content-wrapper">
+                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+                <link rel="stylesheet" type="text/css" href="/css/login.css">
+            <!-- 
+                Page Content
+            -->
+            <div class="container">
+                <div class="push-down center">
+                    <header class="main-content container">
+                        <h1>Join our growing community!</h1>
+                        <p style="font-size: 20px;">
+                           Welcome to the ZettaNetwork.net Site. Here you can logon to see your stats on our servers and go on the forums as well as see the server wide statistics! 
+                        </p>
+                        
+                        <br>
+                        <br>
+                        
+                        <h3>Register in game by using: <code>/register (password)</code></h3>
+                        <br>
+                        <h3 style="color: #BB0900">{{err}}</h3>
+                        <form action="/login" method="post" class="center">
+                        <input type="text" name="username" placeholder="Username">
+
+                        <input type="password" name="password" placeholder="Password">
+                        <input type="submit">
+                        </form>
+                    </header>
+                </div>
+                  
+                </div> 
+            </div>
+            </div>
+            
+            
+            <!--
+                JQuery
+            -->
+            <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            </script>

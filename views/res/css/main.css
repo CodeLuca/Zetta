@@ -1,0 +1,274 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    outline: none;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased-webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+b, strong {
+    font-weight: 700
+}
+h1 {
+    font-size: 3.6em;
+    font-weight: 600;
+    color: #F9690E;
+}
+h2 {
+    font-size: 2.1em;
+    font-weight: 400;
+    color: #ddd;
+    margin-bottom: 10px;
+}
+h3 {
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #FEB407;
+}
+p {
+    font-size: 1.1em;
+    color: white;
+    font-weight: 400
+}
+li {
+    list-style: none
+}
+a {
+    color: #F9690E;
+    text-decoration: none;
+}
+a:hover {
+    transition: all ease .6s;
+    opacity: 0.5
+}
+footer {
+    clear: both;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 0.8em;
+}
+footer a {
+    color: #666;
+}
+footer a:hover {
+    color: #dcdcdc
+}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table
+}
+.clearfix:after {
+    clear: both
+}
+.clearfix {
+    *zoom: 1
+}
+
+.right {
+  color: #EC6400;
+  float: right;
+  padding-right: 4px;
+  padding-left: 1px;
+}
+
+body {
+    font-family: Open sans, Helvitca, Arial;
+    background: #222;
+    overflow-x: hidden
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+.center {
+    display: block;
+    text-align: center;
+    margin: 0 auto
+}
+.container h2 a {
+    color: #FEB407;
+}
+/*
+This comment is for the h2 links which may take you to other pages.
+
+.container h2 a:hover{color: #F9690E; opacity: 1}
+
+*/
+
+header {
+    width: 100%;
+}
+input[type="submit"] {
+    color: #fff;
+    background-color: #E15B3B;
+    border: none;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 32px;
+    padding: 4px 16px;
+}
+input[type="text"], input[type="password"]{
+    padding: 10px;
+    border: solid 5px #E15B3B;
+    transition: border 0.3s;
+}
+input[type="submit"]:hover {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    background-color: #D98E00
+}
+input[type="text"]:focus, input[type="text"].focus, input[type="password"].focus, input[type="password"]:focus {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    border: solid 5px #D98E00;
+    outline: none;
+}
+.container li {
+    float: left;
+    display: inline-block;
+    width: 31%;
+    margin: 30px 1.1%;
+}
+.block {
+    width: 100%;
+    height: auto;
+    margin: 10px 0 20px 0px;
+    padding-bottom: 10px
+}
+.block i, h2 {
+    margin: 10px auto;
+    text-align: center;
+}
+.block p {
+    width: 70%;
+    margin: 10px auto;
+    text-align: left;
+}
+.inline-three {
+    float: left;
+    display: inline-block;
+    width: 20%;
+    margin: 0px 1%;
+    text-align: center;
+}
+/*==================
+=======Footer=======
+==================*/
+
+.blocks {
+    width: 100%;
+    margin: 0 auto;
+}
+.blocks li {
+    width: 46%;
+    margin: 2%;
+    height: auto;
+    float: left
+}
+/*================
+=======Tabs=======
+================*/
+
+/** Start: to style navigation tab **/
+
+.nav {
+    margin-bottom: 18px;
+    margin-left: 0;
+    list-style: none;
+}
+.nav h3 a:hover {
+    opacity: 1
+}
+.nav > li > a {
+    display: block;
+}
+.nav-tabs {
+    *zoom: 1;
+}
+.nav-tabs:before, .nav-tabs:after {
+    display: table;
+    content: "";
+}
+.nav-tabs:after {
+    clear: both;
+}
+.nav-tabs > li {
+    float: left;
+}
+.nav-tabs > li > a {
+    padding-right: 12px;
+    padding-left: 12px;
+    margin-right: 2px;
+    line-height: 14px;
+}
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+.nav-tabs > li {
+    margin-bottom: -1px;
+}
+.nav-tabs > li > a {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 18px;
+    color: #FEB407;
+    border: 1px solid transparent;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+.nav-tabs > li > a:hover {
+    border-color: #eeeeee #eeeeee #dddddd;
+}
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    color: #222;
+    cursor: default;
+    background-color: #ddd;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+li {
+    line-height: 18px;
+}
+.tab-content.active {
+    display: block;
+}
+.tab-content.hide {
+    display: none;
+}
+/** End: to style navigation tab **/
+
+.thread {
+  margin-top: 10;
+  color: #ECEAEA;
+  font-size: 100%;
+  padding-top: 13px;
+  padding-left: 10px;
+  text-align: left;
+  width: 50%;
+  height: 50;
+  border: 2px solid #fff;
+  /*border-radius: 4px;*/
+}
+
+.recent-posts {
+    width: 48%;
+    float: left;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: auto
+}
