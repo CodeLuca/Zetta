@@ -106,7 +106,14 @@ This comment is for the h2 links which may take you to other pages.
 header {
     width: 100%;
 }
-input[type="submit"] {
+img {
+    cursor: pointer;
+}
+input[type="submit"], button {
+    margin-bottom: 2%;
+    bottom:0;
+    position:fixed;
+    margin-left: 10%;
     color: #fff;
     background-color: #E15B3B;
     border: none;
@@ -121,7 +128,7 @@ input[type="text"], input[type="password"]{
     border: solid 5px #E15B3B;
     transition: border 0.3s;
 }
-input[type="submit"]:hover {
+input[type="submit"]:hover, button:hover {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -259,7 +266,7 @@ li {
   padding-top: 13px;
   padding-left: 10px;
   text-align: left;
-  width: 50%;
+  width: 70%;
   height: 50;
   border: 2px solid #fff;
   /*border-radius: 4px;*/

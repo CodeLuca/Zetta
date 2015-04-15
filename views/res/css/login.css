@@ -19,13 +19,19 @@ a:hover{transition:all ease .6s;opacity: 0.5}
 footer{clear:both;text-align: center;padding-top: 20px;padding-bottom: 20px;font-size: 0.8em;}
 footer a{color: #666;}
 footer a:hover{color: #dcdcdc}
-input{padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px;width: 25%; background: none;border: 2px #ddd solid;color: #F9690E;font-size: 1em;}
+input{cursor: pointer; padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px;width: 25%; background: none;border: 2px #ddd solid;color: #F9690E;font-size: 1em;}
+input[type="text"]{width:25%;}
+textarea{ padding-top: 12px; padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px; background: none;border: 2px #ddd solid;color: #F9690E;font-size: 1em; width: 100%; height: 30%}
 .container{width: 80%;margin: 0 auto;}
 .container h2 a{color: #FEB407;}
 .container h2 a:hover{color: #F9690E; opacity: 1}
 
+img {
+  padding-bottom: 10px;
+}
+
 .center{display: block;text-align: center;margin: 0 auto}
-.main-content{margin-top: 60px}
+.main-content{margin-top: 10px}
 .main-content h2{
     color: #F9690E;
     padding-bottom: 10px;
@@ -45,9 +51,9 @@ input{padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px;width
 /*
     Header section
 */
-header input:focus {outline: none;}
+header input:focus, textarea:focus {outline: none;}
 header input:nth-child(3){cursor: pointer}
-header input:nth-child(3):hover{
+header input[type="submit"]:hover{
 -webkit-transition: all .4s ease-in-out;
 -moz-transition: all .4s ease-in-out;
 -o-transition: all .4s ease-in-out;
@@ -60,6 +66,34 @@ color: #222
 /*  
     Tab area
 */
+.comment {
+  padding-top: 3%;
+  color: #fff;
+}
+.player {
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  float: center;
+  color: #DFAB00;
+  margin-bottom: 1%;
+  margin-left: 3%;
+  display: block;
+  display: inline-block;
+  background: #404040
+}
+.viewThread {
+  height: 600px;
+  overflow:auto;
+  display: block;
+  padding-top: 13px;
+  padding-left: 13px;
+  padding-right: 13px;
+  padding-bottom: 13px;
+  background: #313131;
+  width: 80%;
+}
 .tabs li{
     float: left;
     display: inline-block;

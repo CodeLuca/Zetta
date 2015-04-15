@@ -4,21 +4,44 @@
             <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
             <link rel="stylesheet" type="text/css" href="/css/main.css">
             <!-- <center><img src="resources/image/ZettaNetworks-Header.png" style="padding-top: 10px;"></center> -->
+            <br><br>
             <center>
                 <h1 style="color: #EC6400">Forums</h1>
+                <h3>{{err}}</h3>
                  <br>
+                    {{#each threads}}
                     <div class="thread">
-                        Thread Name
-                        <img align="right" src="/resources/image/down.png" width="15" style="  margin-right: 10px;">
-                        <img align="right" src="/resources/image/up.png" width="15" style="  margin-right: 3px;">
-                        <b id="amount" class="right">29</b>
+                        <a style="color: #F3B702" href="/view/{{name}}">{{name}}</a>
+                        <img id="{{name}}" class="down" align="right" src="/resources/image/down.png" width="15" style="  margin-right: 10px;">
+                        <img id="{{name}}" class="up" align="right" src="/resources/image/up.png" width="15" style="  margin-right: 3px;">
+                        <b id="amount" class="right">{{votes}}</b>
                  </div>
+                 {{/each}}
             </div>
         </center>
+        <br>
+        <a href="/newthread"><button>New Thread</button></a>
     </div>
-</div>
+</div>    
 
 <script>
+$('.up').click(function(e){
+    var id = $(this).attr('id');
+    var obj = {name: id, type: 'up'};
+    $.post('/vote', obj, function(data){
+        location.reload();
+    });
+});
+
+$('.down').click(function(e){
+    var id = $(this).attr('id');
+    alert(id);
+    var obj = {name: id, type: 'down'};
+    $.post('/vote', obj, function(data){
+        location.reload();
+    });
+});
+
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");

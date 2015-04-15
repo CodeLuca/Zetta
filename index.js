@@ -2,9 +2,8 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var app = express()
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://192.99.46.113:27017/pure', ['profile']);
-// var db = mongojs('mongodb://192.99.46.113:27017/pure', ['profile']);
-// var factions = mongojs('mongodb://192.99.46.113:27017/pure', ['profile']);
+// var db = mongojs('mongodb://192.99.46.113:27017/pure', ['profile', 'threads', 'users']);
+var db = mongojs('mongodb://localhost:27017/pure', ['profile', 'threads', 'users']);
 var request = require("request");
 var bcrypt = require('bcrypt');
 var session = require('express-session')
@@ -20,6 +19,7 @@ app.use(session({secret: '1234567890QWERTY'}));
 app.enable('trust proxy');
 
 //Routes
+require('./server-js/thread')(app, db /*factions*/);
 require('./server-js/routes')(app, db /*factions*/);
 require('./server-js/forum')(app, db /*factions*/);
 
