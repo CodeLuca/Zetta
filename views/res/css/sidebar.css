@@ -34,7 +34,11 @@ list-style: none;
 #wrapper.toggled #sidebar-wrapper {
     width: 250px;
 }
- 
+
+.btn {
+    color: #2F4F89;
+}
+
 #page-content-wrapper {
     width: 100%;
     position: absolute;
@@ -87,7 +91,7 @@ list-style: none;
 }
  
 .sidebar-nav li a:hover {
-    color: #F9690E;
+    color: #58CDB3;
     background: rgba(255,255,255,0.2);
     opacity: 1
 }

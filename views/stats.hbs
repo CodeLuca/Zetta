@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/stats.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
 <div class="container">
     <div class="push-down center">
@@ -8,33 +8,33 @@
             <!--May need Php to determine the name-->
             <h1>{{name}}</h1>
             <!--May need Php to determine the rank-->
-            <h2>Rank: <a href="#">CSS Lord</a></h2>
+            <h2>Rank: <a href="#">{{rank}}</a></h2>
         </header>
         <section class="tabs container">
             <div>
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href=".tab1"><h4>Factions</h4></a>
+                        <a href=".tab1"><h4>AdvPvP</h4></a>
                     </li>
                     <li>
-                        <a href=".tab2"><h4>Prison</h4></a>
+                        <a href=".tab2"><h4>EliteKits</h4></a>
                     </li>
                     <li>
-                        <a href=".tab3"><h4>Global</h4></a>
+                        <a href=".tab3"><h4>Pots</h4></a>
                     </li>
                 </ul>
             </div>
             <section class="tab-content active tab1">
                 <p>
-                Zetta offers the best of the best when it comes to factions! Our custom features such as enchantment crystals and potion staffs are sure to keep your experience intense and lively!
+                AdvancedPvP is a unique take on TeamsPvP with ranks, kits and more! This is our flagship server and is loved by all our players!
                 </p>
             </section>
             <section class="tab-content hide tab2">
-                <p>PvP, crates, and custom features? What more could you want? Get your pickaxe ready, because it's time to serve <b>your</b> time! Gather your friends and mine yourself to freedom!</p>
+                <p>EliteKits is contantly changing with frequent updates. With loads of maps and kits to choose from, you wont get bored here.</p>
             </section>
             <section class="tab-content hide tab3">
                 <p>
-                    View total hours played and more global statistics!
+                    PracticePots is our newest server but is different to normal PracticePots servers. We have so many cool features that you should come and check out!
                 </p>
             </section>
         </section>
@@ -42,24 +42,28 @@
             <section class="recent-posts">
                 <h2>Forum Activity</h2>
                 <!--May need Php to determine the amount of posts-->
-                <h4>Total posts: 20</h4>
+                <h4>Total posts: {{postAmount}}</h4>
+                <br>
+                {{#each recent}}
                 <li>
                     <p>
-                    Coming Soon to a ZettaNetwork near you.
                     </p>
                 </li>
-                <li>
-                    <p>
-                    <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum numquam, natus nobis quae. -->
-                    </p>
-                </li>
-                <li>
-                    <p>
-                    <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum numquam, natus nobis quae. -->
-                    </p>
-                </li>
+                {{/each}}
             </section>
             <section class="stat active tab1">
+                <h2>Advanced Stats</h2>
+                <h4>Coming Very Soon!</h4>
+            </section>
+            <section class="stat hide tab2">
+                <h2>EliteKits Stats</h2>
+                <h4>Coming Very Soon!</h4>
+            </section>
+            <section class="stat hide tab3">
+                <h2>PracticePots Stats</h2>
+                <h4>Coming Very Soon!</h4>
+            </section>
+            <!-- <section class="stat active tab1">
                 <h2>Factions Stats</h2>
                 <h4>Kills: 18</h4>
                 <h4>Deaths: 3</h4>
@@ -76,7 +80,7 @@
                 <h4>Kills: 18</h4>
                 <h4>Deaths: 3</h4>
                 <h4>Hours played: 0.4</h4>
-            </section>
+            </section> -->
         </div>
     </div>
 </div>

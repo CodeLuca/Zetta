@@ -1,10 +1,17 @@
 module.exports = function(app, db) {
+    app.get('/servers', function(req, res){
+        if(!req.session.username){
+            res.redirect('/login')
+            return;
+        }
+        res.render('servers');
+    });
     app.get('/stats', function(req, res) {
         var kills, deaths, faction;
         if (!req.session.username) {
             res.redirect('/login')
         } else {
-            /*factions.stats.find({
+            /*db.stats.find({
                 currentName: req.session.name
             }, function(err, docs) {
                 if(!docs[0]){
@@ -16,10 +23,23 @@ module.exports = function(app, db) {
                     deaths = docs[0].deaths;
                 }
             });*/
-            res.render('stats', {
-                layout: 'main',
-                name: req.session.username
-            })
+            db.users.find({
+                'name': req.session.username
+            }, function(err, docs){
+                if(!docs[0]){
+                    console.log('error routesjs');
+                    res.rediect('/logout');
+                    return;
+                }
+                var a = docs[0].recent.slice(0, 4);
+                var amount = docs[0].threads.length + 1;
+                res.render('stats', {
+                    'layout': 'main',
+                    'recent': a,
+                    'postAmount': amount,
+                    'name': req.session.username
+                })
+            });
         }
     });
     app.get('/profile/:name', function(req, res) {
@@ -27,7 +47,7 @@ module.exports = function(app, db) {
         if (!req.session.username) {
             res.redirect('/login')
         } else {
-            /*factions.stats.find({
+            /*db.stats.find({
                 currentName: req.session.name
             }, function(err, docs) {
                 if(!docs[0]){
@@ -82,13 +102,23 @@ module.exports = function(app, db) {
                 } else {
                     req.session.username = user;
                     db.users.find({name: user}, function(err, data){
+                      var secret = '';
+                        for(var i = 0; i < 5; i++){
+                          var x = Math.floor(Math.random() * (9 - 0)) + 0;
+                          secret += x.toString();
+                        }
+                        console.log(secret);
                         if(!data[0]){
-                            db.users.insert({name: user, threads: [], recent: [], votes: [] , cooldownStart: 0}, function(){
+                            db.users.insert({name: user, threads: [], recent: [], votes: [] , cooldownStart: 0, 'secret': secret}, function(){
                                 console.log(user + ' Logged in.');
                                 res.redirect('/stats')
                                 return;
                             });
                         } else {
+                            if(data[0].recent.length > 5){
+                                //remove recents
+                            }
+                            db.users.update({name: user}, {$set: {'secret': secret}});
                             console.log(user + ' Logged in.');
                             res.redirect('/stats')
                             return;

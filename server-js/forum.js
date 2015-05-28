@@ -13,6 +13,10 @@ module.exports = function(app, db) {
             });
         }
     });
+    app.get('/logout', function(req, res) {
+        delete req.session.username;
+        res.redirect('/login');
+    });
     app.get('/newthread', function(req, res) {
         if (!req.session.username) res.redirect('/login')
         else {
@@ -23,6 +27,7 @@ module.exports = function(app, db) {
     });
     //New Thread Post Request. Such fun.
     app.post('/newthread', function(req, res) {
+        var postTitle, allowed;
         if (!req.session.username) {
             res.redirect('/login');
             return;
@@ -50,41 +55,67 @@ module.exports = function(app, db) {
                 });
                 return;
             } else {
-                //If there is no cooldown let them make a post!
-                var obj = {
+                //Check if player already has made a post with that name.
+                db.threads.find({
                     name: req.body.title,
-                    user: req.session.username,
-                    votes: 0,
-                    content: req.body.content,
-                    date: Date.now()
-                }
-                //Insert the post to the threads database.
-                db.threads.insert(obj, function() {
-                    console.log('new thread', obj);
-                    //Insert it into the user's object.
-                    db.users.update({
-                        "name": req.session.username
-                    }, {
-                        //Add cooldown
-                        $set: {
-                            "cooldown": Date.now()
-                        }
-                    })
-                    //Add the post to the user's object.
-                    db.users.update({
-                        "name": req.session.username
-                    }, {
-                        $push: {
-                            "threads": {
-                                name: req.body.title,
-                                content: req.body.content,
-                                date: Date.now()
-                            }
-                        }
-                    })
-                    //redirect them to the forums.
-                    res.redirect('/forum');
+                    user: req.session.username
+                }, function(err, docs) {
+                    if (docs[0]) {
+                        res.render('newthread', {
+                            layout: 'main',
+                            err: 'You already have a thread with that name!'
+                        });
+                        // res.redirect('/forum');
+                        console.log('false');
+                        return;
+                    } else {
+                        post();
+                    }
                 });
+                //If there is no cooldown let them make a post!
+                function post() {
+                    var obj = {
+                        name: req.body.title,
+                        user: req.session.username,
+                        votes: 0,
+                        content: req.body.content,
+                        date: Date.now(),
+                        comments: []
+                    };
+                    //Insert the post to the threads database.
+                    db.threads.insert(obj, function() {
+                        console.log('new thread', obj);
+                        //Insert it into the user's object.
+                        db.users.update({
+                            "name": req.session.username
+                        }, {
+                            //Add cooldown
+                            $set: {
+                                "cooldown": Date.now()
+                            }
+                        })
+                        //Add the post to the user's object.
+                        db.users.update({
+                            "name": req.session.username
+                        }, {
+                            $push: {
+                                "threads": {
+                                    name: req.body.title,
+                                    content: req.body.content,
+                                    date: Date.now()
+                                }
+                            },
+                            $push: {
+                                "recent": {
+                                    "post": req.body.title,
+                                    "time": time
+                                }
+                            }
+                        })
+                        //redirect them to the forums.
+                        res.redirect('/forum');
+                    });
+                }
             }
         });
     });
@@ -98,35 +129,62 @@ module.exports = function(app, db) {
         }, function(err, docs) {
             if (err) res.send('Send this eror to an admin ' + err);
             var votes = docs[0].votes;
+            console.log(votes);
             var found = false;
             for (var i = 0; i < votes.length; i++) {
-                if (votes[i].name == req.body.name && votes[i].type == req.body.type) {
-                    found = true;
+                if (votes[i].name == req.body.name) {
+                    if (votes[i].type == req.body.type) {
+                        found = true;
+                        console.log(votes[i].type, req.body.type)
+                    } else {
+                        console.log('opposite')
+                        return;
+                    }
                 }
             }
-            if (found) {
-            	res.send();
+            if (found == true) {
+                res.send();
                 return;
             } else {
-                db.users.update({
-                    "name": req.session.username
-                }, {
-                    $push: {
-                        "votes": {
-                            name: req.body.name,
-                            type: 'up'
+                if (req.body.type == 'up') {
+                    db.users.update({
+                        "name": req.session.username
+                    }, {
+                        $push: {
+                            "votes": {
+                                name: req.body.name,
+                                type: 'up'
+                            }
                         }
-                    }
-                })
-
-                db.threads.update({
-                    "name": req.body.name
-                }, {
-                    $inc: {
-                        "votes": 1
-                    }
-                })
-				res.send('');
+                    })
+                    db.threads.update({
+                        "name": req.body.name
+                    }, {
+                        $inc: {
+                            "votes": 1
+                        }
+                    })
+                    res.send('');
+                } else if (req.body.type == 'down') {
+                    db.users.update({
+                        "name": req.session.username
+                    }, {
+                        $push: {
+                            "votes": {
+                                name: req.body.name,
+                                type: 'down'
+                            }
+                        }
+                    })
+                    db.threads.update({
+                        "name": req.body.name
+                    }, {
+                        $inc: {
+                            "votes": -1
+                        }
+                    })
+                    res.send('');
+                }
             }
         });
         // req.body.name;

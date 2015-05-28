@@ -1,0 +1,205 @@
+<!--
+                Menu button
+-->
+<div id="page-content-wrapper">
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--
+                                    Page Content
+    -->
+    <div class="container">
+        <div class="push-down center">
+            <header class="main-content container">
+                <div id="d" style="display:none">
+                    <div id="p">{{sitePlayer}}</div>
+                    <div id="code">{{code}}</div>
+                </div>
+                <center>
+                <h1>Admin Tickets Panel</h1>
+                <br>
+                <h3 style="color: #BB0900">{{err}}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Ticket Name</th>
+                            <th>Type</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each tickets}}
+                        <tr onclick='view("{{ticketName}}", "{{user}}", "{{type}}", "{{time}}", "{{status}}", "{{content}}", "{{comments}}", "{{@index}}")'>
+                            <td>{{user}}</td>
+                            <td>{{ticketName}}</td>
+                            <td>{{type}}</td>
+                            <td>{{time}}</td>
+                            <td>{{status}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                </center>
+                <div class="viewer" style="text-align: left; display:none;">
+                    <br>
+                    <h2 id="tName"></h2>
+                    <h3 class="inline" style="color:#62CEFF;">Player: </h3>
+                    <h3 class="inline" id="tUser"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">Type: </h3>
+                    <h3 class="inline" id="tType"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">Time: </h3>
+                    <h3 class="inline" id="tTime"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">Status: </h3>
+                    <h3 class="inline" id="tStatus"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">Content: </h3>
+                    <h3 class="inline" id="tContent"></h2><br><br>
+                    <h3 class="inline" style="color:#62CEFF;">Comments: </h3>
+                    <p class="inline" id="tComments"></p><br>
+                    <br><br>
+                    <center>
+                    <input id="message" placeholder="Comment on Ticket"><br><br>
+                    <div class="radio">
+                        <input type="radio" class="status" name="status" value="Open" checked> Open
+                        <input type="radio" class="status" name="status" value="In Progress"> In Progress
+                        <input type="radio" class="status" name="status" value="Closed"> Closed
+                    </div>
+                    <br><input type="submit" onclick="submit()">
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    /*Responsive table*/
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #34495e;
+    color: #f3f3f3;
+    }
+    tr {
+    cursor: pointer;
+    }
+    tr:hover {
+        -webkit-transition: all 0.2s;
+        color: #212F3F;
+    }
+    th:hover {
+        -webkit-transition: all 0.3s;
+        color: #fff;
+    }
+    td, th {
+    padding: 8px;
+    text-align: left;
+    }
+    /* Zebra striping */
+    tr:nth-of-type(odd) {
+    background: #16a085;
+    }
+    th {
+    background: #2c3e50;
+    font-weight: bold;
+    }
+    /* Extras */
+    .button-3d {
+    position:relative;
+    width: auto;
+    color:#ecf0f1;
+    text-decoration:none;
+    border-radius:5px;
+    border:solid 1px #f39c12;
+    background:#e67e22;
+    text-align:center;
+    padding:8px 18px 6px;
+    margin: 6px;
+    float: right;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    -webkit-box-shadow: 0px 4px 0px #d35400;
+    -moz-box-shadow: 0px 4px 0px #d35400;
+    box-shadow: 0px 4px 0px #d35400;
+    }
+    .button-3d:active{
+    -webkit-box-shadow: 0px 2px 0px #d35400;
+    -moz-box-shadow: 0px 2px 0px #d35400;
+    box-shadow: 0px 2px 0px #d35400;
+    position:relative;
+    top:2px;
+    }
+</style>
+<!--
+                        JQuery
+-->
+<script>
+    var cArray, guser, gname, gdate, gcontent;
+        var str = [];
+            {{#each tickets}}
+                var com = [];
+                {{#each comments}}
+                    com[{{@index}}] = {'account':"{{account}}", 'comment': "{{message}}"};
+                {{/each}}
+                str[{{@index}}] = {
+                    'index': 0,
+                    'comments': com
+                }
+            {{/each}}
+        cArray = str;
+
+        function submit(){
+            $.post('/ticketComment', {
+                'ticketStatus': $('.status:checked').val(),
+                'ticketName': gname,
+                'ticketContent': gcontent,
+                'ticketCreator': guser,
+                'ticketDate': gdate,
+                'commentMsg': $('#message').val(),
+                'commentUser': $('#p').text(),
+                'code': $('#code').text()
+            }, function(data){
+                if(data != 'Success'){
+                    alert(data);
+                    window.location = window.location;
+                } else {
+                    window.location = window.location;
+                }
+            });
+        }
+
+        function view(name, user, type, time, status, content, comments, index) {
+            $('#tName').text(name);
+            $('#tUser').text(user)
+            $('#tType').text(type)
+            $('#tTime').text(time)
+            $('#tStatus').text(status)
+            $('#tContent').text(content)
+            var com = '';
+            guser = user,
+            gname = name,
+            gdate = time,
+            gcontent = content;
+
+            cArray[index].comments.reverse();
+            for (var i = 0; i < cArray[index].comments.length; i++) {
+                com = (com + "<div class='comment'><div class='player'>" + cArray[index].comments[i].account + "</div>" + cArray[index].comments[i].comment + "</div>")
+            }
+            $('#tComments').html(com);
+            $(".viewer").slideDown( "slow" );
+            }
+            var shown = false;
+            function show(){
+                if(shown == false){
+                    $( "#new" ).slideDown( "slow" );
+                    shown = true;
+                } else {
+                    $('#new').slideUp( "slow" )
+                    shown = false;
+                }
+            }
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+</script>

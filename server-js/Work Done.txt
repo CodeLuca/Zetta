@@ -1,0 +1,70 @@
+Ranking System based on Time and Difficulty: 
+	' ' = easy / quick
+	'*' = medium
+	'!' = hard / long
+
+Design:
+	Front Page (very very easy):
+		- Just make the page responsive (mobile friendly)
+		- Added Image
+
+	Main Site (!):
+		- Hired proffessional designer to intergrate color scheme with logo.
+		- Designer worked 8+ hours on the design and layout.
+		- Side bar that slides in and out, unique-ish navigation system.
+		- All CSS from scratch with no copyright.
+		- Responsive (Made for mobile devices in mind)
+
+Front Page:
+	Added Server Status Box, with live data (*):
+		- Version
+		- Player Count
+		- Online / Offline
+	Fixed Voting (With Calvin)
+
+Login Page:
+	Login System (!):
+		- Connects to Database
+		- Checks if player registered / exists / correct pass
+		- Redirects away from login if already logged in
+		- Secret Key generation per login session for security that is stored on client.
+
+Stats / Profile Page:
+	Whole Page (!/*):
+		- Backend already coded to accept stats from database (Calvin never implemented)
+			+ Connects to Server's DB
+		- Profile image loaded from API using username.
+		- Tabs system to look at different stats
+		- Forum activity from user in database
+		- Rank grabbing backend implemented
+
+Forum:
+	Front Page (*/!):
+		- Grabs data from seperate database
+		- Uses Reddit-style unique system for ranking posts.
+			+ One vote per post
+			+ Votes stored in DB
+		- Responsive (not easy with this page.)
+
+	New Thread (!/*):
+		- Stylised Forms.
+		- Puts Data in Threads Database.
+		- Cooldown on Threads so no spam
+			+ Working on more effective algorithm for this.
+
+	View Thread (!):
+		- Loads from DB
+		- Clickable Profile to visit Posters Profile.
+		- Realtime Comments system unique to site.
+			+ Anti-Spam System.
+			+ Anti-Hack System (So cannot change Username).
+			+ Backend keeps Memory usage down.
+			+ Working on algorithm to keep relevent comments only in DB
+			+ Adds to Profile Page.
+Misc:
+	- Site redirects you to Login if person goes to pages without being logged in.
+	- Uses Security key system to prevent hacking into accounts.
+	- Cooldowns on accessing pages.
+	- Encryption backend implemented (Not used at the moment because /Password not encrypted)
+	- 404 Page there for going to wrong page.
+	- Code in GitHub Private Repo for you to see.

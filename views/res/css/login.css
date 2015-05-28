@@ -6,11 +6,11 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
 
 body{font-family:Open sans,Helvitca,Arial;background:#222;overflow-x:hidden}
 
-::selection{background: #F9690E; color: white}
+::selection{background: #7FDDEE; color: white}
 b,strong{font-weight:700}
-h1{font-size:3.6em;font-weight:600;color: #F9690E;}
+h1{font-size:3.6em;font-weight:600;color: #1CB791;}
 h2{font-size:1.8em;font-weight:400;color: #ddd;margin-bottom: 10px;}
-h3{font-size:1.5em;font-weight:400;color: #FEB407;}
+h3{font-size:1.5em;font-weight:400;color: #fff;}
 h4{font-size:1.4em;font-weight:400;color: #ddd}
 p{font-size:1.1em;color: #ddd;font-weight: 400;margin-top: 20px;}
 li{list-style:none}
@@ -19,9 +19,9 @@ a:hover{transition:all ease .6s;opacity: 0.5}
 footer{clear:both;text-align: center;padding-top: 20px;padding-bottom: 20px;font-size: 0.8em;}
 footer a{color: #666;}
 footer a:hover{color: #dcdcdc}
-input{cursor: pointer; padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px;width: 25%; background: none;border: 2px #ddd solid;color: #F9690E;font-size: 1em;}
-input[type="text"]{width:25%;}
-textarea{ padding-top: 12px; padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px; background: none;border: 2px #ddd solid;color: #F9690E;font-size: 1em; width: 100%; height: 30%}
+input{ cursor: pointer; padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px;width: 25%; background: none;border: 2px #ddd solid;color: #00B3FF;font-size: 1em;}
+input[type="text"]{margin-left:10%; width:25%;}
+textarea{ padding-top: 12px; padding-left: 12px; padding-right:12px; height: 3em;margin:20px 10px; background: none;border: 2px #ddd solid;color: #00B3FF;font-size: 1em; width: 100%; height: 30%}
 .container{width: 80%;margin: 0 auto;}
 .container h2 a{color: #FEB407;}
 .container h2 a:hover{color: #F9690E; opacity: 1}
@@ -63,12 +63,21 @@ color: #222
 }
 /*End*/
 
-/*  
+/*
     Tab area
 */
 .comment {
-  padding-top: 3%;
-  color: #fff;
+  color: #a5a5a5;
+  text-align: left;
+  overflow:auto;
+  display: block;
+  /*margin-top: 3%;*/
+  padding-top: 13px;
+  padding-left: 13px;
+  padding-right: 13px;
+  padding-bottom: 13px;
+  background: #202020;
+  width: 80%;
 }
 .player {
   padding-top: 5px;
@@ -76,15 +85,14 @@ color: #222
   padding-right: 5px;
   padding-bottom: 5px;
   float: center;
-  color: #DFAB00;
+  color: #72E4EE;
   margin-bottom: 1%;
-  margin-left: 3%;
+  margin-left: 2%;
   display: block;
   display: inline-block;
   background: #404040
 }
 .viewThread {
-  height: 600px;
   overflow:auto;
   display: block;
   padding-top: 13px;
@@ -176,7 +184,7 @@ li {
     color: #4f5a65;
 }
 .table-sml h2, .table-med h2, table-lrg h2{
-    color: #1978d4; 
+    color: #1978d4;
     margin: 20px auto 10px auto;
     text-align: center
 }
@@ -226,8 +234,8 @@ li {
     }
 .small-para p{
         margin: 8% auto;
-    }   
-    
+    }
+
 .table-sml table{
     text-align: left;
     width: 90%

@@ -1,8 +1,8 @@
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{height:auto;margin:0;padding:0;border:0;font-size:100%;vertical-align:baseline;outline:none;-webkit-font-smoothing:antialiased;font-smoothing:antialiased-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 b,strong{font-weight:700}
-h1{font-size:3.6em;font-weight:600;color: #F9690E;}
-h2{font-size:1.8em;font-weight:400;color: #ddd;margin-bottom: 10px;}
-h3{font-size:1.5em;font-weight:400;color: #FEB407;}
+h1{font-size:3.6em;font-weight:600;color: #00B3FF;}
+h2{font-size:1.8em;font-weight:400;color: #0080FF;margin-bottom: 10px;}
+h3{font-size:1.5em;font-weight:400;color: #0080FF;}
 h4{font-size:1.4em;font-weight:400;color: #ddd}
 p{font-size:1.1em;color: white;font-weight: 400;margin-top: 20px}
 li{list-style:none}
@@ -24,7 +24,7 @@ body{font-family:Open sans,Helvitca,Arial;background:#222;overflow-x:hidden}
 
 
 .center{display: block;text-align: center;margin: 0 auto}
-.container h2 a{color: #FEB407;}
+.container h2 a{color: #00AAFF;}
 
 
 /*
@@ -52,7 +52,7 @@ This comment is for the h2 links which may take you to other pages.
   list-style: none;
 }
 
-.nav h4 {color: #F9690E;}
+.nav h4 {color: #0080FF;}
 
 .nav > li > a {
   display: block;
@@ -146,7 +146,7 @@ li {
 }
 
 .main-content h2{
-    color: #F9690E;
+    color: #58CDB3;
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd
 }

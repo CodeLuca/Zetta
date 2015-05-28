@@ -1,11 +1,16 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
-            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x">test</i></a>
+            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+            <link rel="stylesheet" type="text/css" href="/css/main.css">
             <link rel="stylesheet" type="text/css" href="/css/login.css">
             <!-- <center><img src="resources/image/ZettaNetworks-Header.png" style="padding-top: 10px;"></center> -->
             <br><br>
             <center>
+            <div style="display: none; color: #E6DFD2">
+              Current Account: <div id="siteUsername" style="display: none; color:#C5900A">{{siteUser}} <div id="rank" style="display: none; color:##B11200">{{rank}}</div></div>
+            </div>
+            <br>
             <div class="viewThread">
                 <a href="/profile/{{user}}">
                 <div class="player">
@@ -13,20 +18,67 @@
                     {{user}}
                 </div></a>
                 </a>
-                <h1 style="color: #EC6400">{{name}}</h1>
+                <h1 style="color: #02B1EE" id="name">{{name}}</h1>
                 <br>
                 <h3 style="text-align:left; color: #D7D7D7">{{content}}</h3>
             </div>
+          </center>
+            <!-- <form> -->
+              <input onkeypress="return pressEvent(event);" type="text" name="name" id="body" placeholder="Leave a Comment." autocomplete="off">
+              <input type="submit" id="submit" name="name" value="Submit" style="width: 15%;">
+            <!-- </form> -->
+            <center>
+              <div id="comments">
+            {{#each comments}}
             <div class="comment">
-                Hello there this is a test comment.
+              <div class="player" style="margin-right: 15px;">
+                {{user}}
+              </div>
+                {{msg}}
             </div>
+            {{/each}}
+          </div>
         </div>
         </center>
         <br>
     </div>
 </div>
+<div id="code" style="display: none">{{code}}</div>
+
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
 <script>
-$("#menu-toggle").click(function(e) {
+var socket = io();
+
+$(function() {
+  listen();
+  socket.emit('room', $('#name').text());
+});
+
+var listen = function() {
+  socket.on('newMsg', function(msg, name){
+    console.log(name);
+    $('#comments').prepend('<div class="comment"> <div class="player" style="margin-right: 15px;"> ' + name + ' </div> ' + msg +' </div>');
+  });
+};
+
+$("#submit").click(function(e) {
+  chat();
+});
+
+function pressEvent(e){
+  if(e.keyCode == 13) {
+    chat();
+    return false;
+  }
+}
+
+function chat(){
+  socket.emit('chat', $('#name').text(), $('#body').val(), '{{siteUser}}', $('#code').text());
+  $('#body').val('');
+}
+
+$("#").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 });

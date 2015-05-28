@@ -7,6 +7,12 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css">
         <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script> 
+        <script>
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+</script>
     </head>
     <body>
         <div id="wrapper">
@@ -19,7 +25,7 @@
                     -->
                     <li class="sidebar-brand">
                         <a href="#">
-                        <img src="/resources/image/ZettaNetworks-Header.png" width="200px" style="padding-top: 23px;" class="center">
+                        <img src="/resources/image/test2.png" width="220px" style="padding-top: 23px;" class="center">
                         </a>
                     </li>
                     
@@ -27,19 +33,33 @@
                         Sidebar links
                     -->
                     <li class="container center">
-                        <a href="/stats" style="padding-top: 30px;">
-                        <i class="fa fa-home"></i> <b>Dashboard</a>
+                        <a href="/home" style="padding-top: 30px;">
+                        <i class="fa fa-home"></i> <b>Home</a>
+                    </li>
+                    <li class="container center">
+                        <a href="/stats">
+                        <i class="fa fa-user"></i> <b>Profile</a>
                     </li>
                     <li class="container center">
                         <a href="/forum"><i class="fa fa-paper-plane"></i> Forum</a>
                     </li>
                     <li class="container center">
-                        <a href="/soon"><i class="fa fa-bar-chart"></i> <b>Global Stats</a>
+                        <a href="/tickets"><i class="fa fa-ticket"></i> Tickets</a>
+                    </li>
+                    <li class="container center">
+                        <a href="/servers">
+                        <i class="fa fa-server"></i> <b>Servers</a>
+                    </li>
+                    <li class="container center">
+                        <a href="/news">
+                        <i class="fa fa-newspaper-o"></i> <b>News</a>
                     </li>
                     <li class="container center">
                         <a href="/login"><i class="fa fa-users"></i> <b>Login</a>
                     </li>
-                    
+                    <li class="container center">
+                        <a href="/logout"><i class="fa fa-sign-out"></i> <b>Logout</a>
+                    </li>
                     
                 </ul>
             </div>

@@ -6,12 +6,12 @@
             <!-- <center><img src="resources/image/ZettaNetworks-Header.png" style="padding-top: 10px;"></center> -->
             <br><br>
             <center>
-                <h1 style="color: #EC6400">Forums</h1>
+                <h1 style="color: #58CDB3">Forums</h1>
                 <h3>{{err}}</h3>
                  <br>
                     {{#each threads}}
                     <div class="thread">
-                        <a style="color: #F3B702" href="/view/{{name}}">{{name}}</a>
+                        <a style="color: #00A6DF" href="/view/{{name}}&{{user}}">{{name}}</a>
                         <img id="{{name}}" class="down" align="right" src="/resources/image/down.png" width="15" style="  margin-right: 10px;">
                         <img id="{{name}}" class="up" align="right" src="/resources/image/up.png" width="15" style="  margin-right: 3px;">
                         <b id="amount" class="right">{{votes}}</b>
@@ -35,7 +35,6 @@ $('.up').click(function(e){
 
 $('.down').click(function(e){
     var id = $(this).attr('id');
-    alert(id);
     var obj = {name: id, type: 'down'};
     $.post('/vote', obj, function(data){
         location.reload();
