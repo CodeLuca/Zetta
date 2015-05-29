@@ -6,6 +6,13 @@ module.exports = function(app, db) {
         }
         res.render('servers');
     });
+    app.get('/buy', function(req, res){
+        if(!req.session.username){
+            res.redirect('/login')
+            return;
+        }
+        res.render('buy');
+    });
     app.get('/stats', function(req, res) {
         var kills, deaths, faction;
         if (!req.session.username) {
@@ -23,8 +30,16 @@ module.exports = function(app, db) {
                     deaths = docs[0].deaths;
                 }
             });*/
+            res.redirect('/profile/' + req.session.username);
+        }
+    });
+    app.get('/profile/:name', function(req, res) {
+        var kills, deaths, faction;
+        if (!req.session.username) {
+            res.redirect('/login')
+        } else {
             db.users.find({
-                'name': req.session.username
+                'name': req.params.name
             }, function(err, docs){
                 if(!docs[0]){
                     console.log('error routesjs');
@@ -37,32 +52,10 @@ module.exports = function(app, db) {
                     'layout': 'main',
                     'recent': a,
                     'postAmount': amount,
-                    'name': req.session.username
+                    'voteAmount': docs[0].votes.length,
+                    'name': req.params.name
                 })
             });
-        }
-    });
-    app.get('/profile/:name', function(req, res) {
-        var kills, deaths, faction;
-        if (!req.session.username) {
-            res.redirect('/login')
-        } else {
-            /*db.stats.find({
-                currentName: req.session.name
-            }, function(err, docs) {
-                if(!docs[0]){
-                    res.send('Error: Nothing found with your username in the database. Please contact an admin.');
-                    return;
-                } else {
-                    kills = docs[0].kills;
-                    faction = docs[0].faction;
-                    deaths = docs[0].deaths;
-                }
-            });*/
-            res.render('stats', {
-                layout: 'main',
-                name: req.params.name
-            })
         }
     });
     app.get('/login', function(req, res) {

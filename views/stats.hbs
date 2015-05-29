@@ -13,35 +13,58 @@
         <section class="tabs container">
             <div>
                 <ul class="nav nav-tabs">
+                    <li>
+                        <a href=".tab1"><h4>Global</h4></a>
+                    </li>
+                    <li>
+                        <a href=".tab2"><h4>AdvancedPvP</h4></a>
+                    </li>
                     <li class="active">
-                        <a href=".tab1"><h4>AdvPvP</h4></a>
-                    </li>
-                    <li>
-                        <a href=".tab2"><h4>EliteKits</h4></a>
-                    </li>
-                    <li>
-                        <a href=".tab3"><h4>Pots</h4></a>
+                        <a href=".tab3"><h4>Forums</h4></a>
                     </li>
                 </ul>
             </div>
-            <section class="tab-content active tab1">
-                <p>
-                AdvancedPvP is a unique take on TeamsPvP with ranks, kits and more! This is our flagship server and is loved by all our players!
-                </p>
+            <center>
+            <section class="tab-content hide tab1">
+                <font size="10" color="#7CE6C0">Global Statistics:</font>
+                <h3>
+                    <li><b>First Login Date:</b> </li>
+                    <li><b>Hours Played on BreakMC:</b> </li>
+                    <li><b>Number of Logins:</b> </li>
+                </h3>
             </section>
+            
             <section class="tab-content hide tab2">
-                <p>EliteKits is contantly changing with frequent updates. With loads of maps and kits to choose from, you wont get bored here.</p>
+               <font size="10" color="#7CE6C0">AdvancedPvP Statistics:</font>
+                <h3>
+                    <li><b>Team Name:</b> </li>
+                    <li><b>Balance:</b> </li>
+                </h3>
             </section>
-            <section class="tab-content hide tab3">
-                <p>
-                    PracticePots is our newest server but is different to normal PracticePots servers. We have so many cool features that you should come and check out!
-                </p>
+            
+            <section class="tab-content active tab3">
+               <font size="10" color="#7CE6C0">Site and Forums Statistics:</font>
+                <h3>
+                    <li style="width: 50%"><b>Amount of Posts:</b> {{postAmount}}</li>
+                    <li><b>Amount of Votes:</b> {{voteAmount}}</li>
+                    <br><br><br><br>
+                    <div id="forumRecent">
+                        <h3 style="color: #00A8E6">Recent Forum Activity:</h2>
+                        {{#each recent}}
+                            <li class="recent">
+                                <p>
+                                    <b>Post:</b> {{post}}
+                                    <br>
+                                    <b>Type:</b> {{type}}
+                                </p>
+                            </li>
+                        {{/each}}
+                    </div>
+                </h3>
             </section>
         </section>
-        <div class="main-content container">
-            <section class="recent-posts">
-                <h2>Forum Activity</h2>
-                <!--May need Php to determine the amount of posts-->
+    </center>
+<!--                 <h2>Forum Activity</h2>
                 <h4>Total posts: {{postAmount}}</h4>
                 <br>
                 {{#each recent}}
@@ -49,45 +72,25 @@
                     <p>
                     </p>
                 </li>
-                {{/each}}
-            </section>
-            <section class="stat active tab1">
-                <h2>Advanced Stats</h2>
-                <h4>Coming Very Soon!</h4>
-            </section>
-            <section class="stat hide tab2">
-                <h2>EliteKits Stats</h2>
-                <h4>Coming Very Soon!</h4>
-            </section>
-            <section class="stat hide tab3">
-                <h2>PracticePots Stats</h2>
-                <h4>Coming Very Soon!</h4>
-            </section>
-            <!-- <section class="stat active tab1">
-                <h2>Factions Stats</h2>
-                <h4>Kills: 18</h4>
-                <h4>Deaths: 3</h4>
-                <h4>Hours played: 0.4</h4>
-            </section>
-            <section class="stat hide tab2">
-                <h2>Prison Stats</h2>
-                <h4>Kills: 18</h4>
-                <h4>Deaths: 3</h4>
-                <h4>Hours played: 0.4</h4>
-            </section>
-            <section class="stat hide tab3">
-                <h2>Global Stats</h2>
-                <h4>Kills: 18</h4>
-                <h4>Deaths: 3</h4>
-                <h4>Hours played: 0.4</h4>
-            </section> -->
-        </div>
+                {{/each}} -->
     </div>
 </div>
 </div>
 <!--
                 JQuery
 -->
+<style type="text/css">
+    li {  
+        line-height: 110%;
+    }
+    .recent {
+        line-height: 130%;
+    }
+    #forumRecent {
+        padding: 10px;
+        background-color: #383838
+    }
+</style>
 <script>
             $("#menu-toggle").click(function(e) {
                 e.preventDefault();

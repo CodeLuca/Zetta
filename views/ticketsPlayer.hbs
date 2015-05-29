@@ -50,13 +50,29 @@
                             <div class="radio">
                                 <input type="radio" name="type" value="Xray" checked> Xray
                             </div>
+
+                            <div style="color: #fff">
+                            Server: <select name="server">
+                              <option value="AdvancedPvP" selected>AdvancedPvP</option>
+                              <option value="EliteKits">EliteKits</option>
+                              <option value="PracticePots">PracticePots</option>
+                              <option value="MC-HCF">MCHCF</option>
+                            </select>
+                            World: <select name="world">
+                              <option value="Overworld">Overworld</option>
+                              <option value="Nether">Nether</option>
+                              <option value="End">End</option>
+                            </select>
+                            </div>
+
                             <div class="coords">
                                 X:<input type="number" name="x" min="-10000" max="10000"> 
                                 Y:<input type="number" name="y" min="0" max="265"> 
                                 Z:<input type="number" name="z" min="-10000" max="10000"> 
                             </div>
                             <br>
-                            <textarea name="content" placeholder="Details, e.g: Co-ords, Date, Possible Suspects, Players with access to warp etc..."></textarea>
+                            <textarea name="players" placeholder="Players with access to warp."></textarea><br><br>
+                            <textarea name="details" placeholder="Other details of the Xray."></textarea><br>
                             <br><br><input type="submit">
                         </form>
                     </div>
@@ -73,7 +89,7 @@
                     <h3 class="inline" style="color:#62CEFF;">Status: </h3>
                     <h3 class="inline" id="tStatus"></h2><br>
                     <h3 class="inline" style="color:#62CEFF;">Content: </h3>
-                    <h3 class="inline" id="tContent"></h2><br><br>
+                    <h3 class="inline" class="content" id="tContent"></h2><br><br>
                     <h3 class="inline" style="color:#62CEFF;">Comments: </h3>
                     <p class="inline" id="tComments"></p><br>
                     <br><br>
@@ -149,7 +165,7 @@
                         JQuery
 -->
 <script>
-    var cArray, guser, gname, gdate, gcontent;
+    var cArray, guser, gname, gdate, gcontent, gstatus;
         var str = [];
             {{#each tickets}}
                 var com = [];
@@ -164,7 +180,7 @@
         cArray = str;
         function submit(){
             $.post('/ticketComment', {
-                'ticketStatus': $('.status:checked').val(),
+                'ticketStatus': gstatus,
                 'ticketName': gname,
                 'ticketContent': gcontent,
                 'ticketCreator': guser,
@@ -188,12 +204,13 @@
             $('#tType').text(type)
             $('#tTime').text(time)
             $('#tStatus').text(status)
-            $('#tContent').text(content)
+            $('#tContent').html(content)
             var com = '';
             guser = user,
             gname = name,
             gdate = time,
-            gcontent = content;
+            gcontent = content,
+            gstatus = status;
             cArray[index].comments.reverse();
             for (var i = 0; i < cArray[index].comments.length; i++) {
                 com = (com + "<div class='comment'><div class='player'>" + cArray[index].comments[i].account + "</div>" + cArray[index].comments[i].comment + "</div>")

@@ -1,0 +1,222 @@
+<!--
+                Menu button
+-->
+<div id="page-content-wrapper">
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--
+                                    Page Content
+    -->
+    <div class="container">
+        <div class="push-down center">
+            <header class="main-content container">
+                <div id="d" style="display:none">
+                    <div id="p">{{sitePlayer}}</div>
+                    <div id="code">{{code}}</div>
+                </div>
+                <center>
+                <h1>Admin Applications Panel</h1>
+                <br>
+                <h3 style="color: #BB0900">{{err}}</h3>
+                <h2>Moderator</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each moderator}}
+                        <tr onclick='view("{{user}}", "{{server}}", "{{age}}", "{{timezone}}", "{{skype}}", "{{activity}}", "{{experience}}", "{{info}}", "{{date}}", "{{status}}")'>
+                            <td>{{user}}</td>
+                            <td>{{date}}</td>
+                            <td>{{status}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                
+                <br><br>
+
+                <h2>Youtuber</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each youtuber}}
+                        <tr onclick='viewYT("{{user}}", "{{channel}}", "{{link}}", "{{type}}", "{{date}}", "{{status}}")'>
+                            <td>{{user}}</td>
+                            <td>{{date}}</td>
+                            <td>{{status}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+
+                </center>
+                <div class="viewer" style="text-align: left; display:none;">
+                    <br>
+                    <h2 id="tName"></h2>
+                    <h3 class="inline" style="color:#62CEFF;">Player: </h3>
+                    <h3 class="inline" id="tUser"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Server: </h3>
+                    <h3 class="inline" id="tServer"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Age: </h3>
+                    <h3 class="inline" id="tage"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Timezone: </h3>
+                    <h3 class="inline" id="tTimezone"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Skype: </h3>
+                    <h3 class="inline" class="content" id="tSkype"></h3><br><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Experience: </h3>
+                    <h3 class="inline" id="tExperience"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Other Info: </h3>
+                    <h3 class="inline" id="tInfo"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Date: </h3>
+                    <h3 class="inline" id="tDate"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Status: </h3>
+                    <h3 class="inline" id="tStatus"></h3><br>
+
+                    <br>
+            </div>
+
+
+                <div class="viewYT" style="text-align: left; display:none;">
+                    <br>
+                    <h3 class="inline" style="color:#62CEFF;">Player: </h3>
+                    <h3 class="inline" id="yUser"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Channel: </h3>
+                    <h3 class="inline" id="yChannel"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Video Link: </h3>
+                    <h3 class="inline" id="yLink"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Date: </h3>
+                    <h3 class="inline" id="yDate"></h3><br>
+
+                    <h3 class="inline" style="color:#62CEFF;">Status: </h3>
+                    <h3 class="inline" id="yStatus"></h3><br>
+                </div>
+            <br>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    /*Responsive table*/
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #34495e;
+    color: #f3f3f3;
+    }
+    tr {
+    cursor: pointer;
+    }
+    tr:hover {
+        -webkit-transition: all 0.2s;
+        color: #212F3F;
+    }
+    th:hover {
+        -webkit-transition: all 0.3s;
+        color: #fff;
+    }
+    td, th {
+    padding: 8px;
+    text-align: left;
+    }
+    /* Zebra striping */
+    tr:nth-of-type(odd) {
+    background: #16a085;
+    }
+    th {
+    background: #2c3e50;
+    font-weight: bold;
+    }
+    /* Extras */
+    .button-3d {
+    position:relative;
+    width: auto;
+    color:#ecf0f1;
+    text-decoration:none;
+    border-radius:5px;
+    border:solid 1px #f39c12;
+    background:#e67e22;
+    text-align:center;
+    padding:8px 18px 6px;
+    margin: 6px;
+    float: right;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    -webkit-box-shadow: 0px 4px 0px #d35400;
+    -moz-box-shadow: 0px 4px 0px #d35400;
+    box-shadow: 0px 4px 0px #d35400;
+    }
+    .button-3d:active{
+    -webkit-box-shadow: 0px 2px 0px #d35400;
+    -moz-box-shadow: 0px 2px 0px #d35400;
+    box-shadow: 0px 2px 0px #d35400;
+    position:relative;
+    top:2px;
+    }
+</style>
+<!--
+                        JQuery
+-->
+<script>
+    var cArray, guser, gname, gdate, gcontent;
+
+        function view(user, server, age, timezone, skype, activity, experience, info, date, status) {
+            $('#tUser').text(user);
+            $('#tServer').text(server)
+            $('#tage').text(age)
+            $('#tTimezone').text(timezone)
+            $('#tSkype').text(skype)
+            $('#tExperience').text(experience)
+            $('#tInfo').text(info)
+            $('#tDate').text(date)
+            $('#tStatus').text(status)
+            $('.viewer').fadeIn('slow');
+            $('.viewYT').fadeOut('slow');
+            }
+
+        function viewYT(user, channel, link, type, date, status) {
+            $('#yUser').text(user);
+            $('#yChannel').text(channel)
+            $('#yLink').text(link)
+            $('#yDate').text(date)
+            $('#yStatus').text(status)
+            $('.viewYT').fadeIn('slow');
+            $('.viewer').fadeOut('slow');
+            }
+            var shown = false;
+            function show(){
+                if(shown == false){
+                    $( "#new" ).slideDown( "slow" );
+                    shown = true;
+                } else {
+                    $('#new').slideUp( "slow" )
+                    shown = false;
+                }
+            }
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+</script>

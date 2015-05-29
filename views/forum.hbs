@@ -5,6 +5,11 @@
             <link rel="stylesheet" type="text/css" href="/css/main.css">
             <!-- <center><img src="resources/image/ZettaNetworks-Header.png" style="padding-top: 10px;"></center> -->
             <br><br>
+            <div id="d" style="display:none">
+                <div id="p">{{sitePlayer}}</div>
+                <div id="code">{{code}}</div>
+                <div id="aT">{{aT}}</div>
+            </div>
             <center>
                 <h1 style="color: #58CDB3">Forums</h1>
                 <h3>{{err}}</h3>
@@ -12,6 +17,7 @@
                     {{#each threads}}
                     <div class="thread">
                         <a style="color: #00A6DF" href="/view/{{name}}&{{user}}">{{name}}</a>
+                        <b class="aB aDel" style="display:none;" onclick='del("{{name}}", "{{votes}}", "{{content}}")'>Delete</b>
                         <img id="{{name}}" class="down" align="right" src="/resources/image/down.png" width="15" style="  margin-right: 10px;">
                         <img id="{{name}}" class="up" align="right" src="/resources/image/up.png" width="15" style="  margin-right: 3px;">
                         <b id="amount" class="right">{{votes}}</b>
@@ -25,6 +31,33 @@
 </div>    
 
 <script>
+$(function(){
+    if($('#aT').text() == "true"){
+        $('.aB').fadeIn("slow");
+    }
+});
+
+function del(name, votes, content){
+    var x;
+    if (confirm("Are you sure you want to delete this post?") == true) {
+        $.post('/delthread', {
+            'name': name,
+            'votes': votes,
+            'content': content,
+            'user': $('#p').text(),
+            'secret': $('#code').text()
+        }, function(res){
+            if(res == '401'){
+                alert('You do not have perms for this action.')
+            } else {
+                location.reload();
+            }
+        });
+    } else {
+        x = "You pressed Cancel!";
+    }
+}
+
 $('.up').click(function(e){
     var id = $(this).attr('id');
     var obj = {name: id, type: 'up'};

@@ -94,7 +94,7 @@ module.exports = function(app, db, io) {
                         $push: {
                             "recent": {
                                 "post": room,
-                                "time": time
+                                "type": "Comment"
                             }
                         }
                     });

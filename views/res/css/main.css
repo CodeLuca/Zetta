@@ -498,3 +498,33 @@ li {
     border-radius: 4px;
     height: auto
 }
+.aDel {
+  color: #8E0004;
+  padding-left: 3px;
+  cursor: pointer;
+}
+.aDel:hover {
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  color: #620002;
+  padding-left: 3px;
+  cursor: pointer;
+}
+select
+{
+    margin-top: 10px;
+    display: inline-block;
+    width: 150px;
+    height: 20px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #555555;
+    vertical-align: middle;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}

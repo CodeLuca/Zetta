@@ -53,7 +53,11 @@ module.exports = function(app, db) {
         }
         var date = new Date();
         time = date.toString().substring(0, 15)
-        var content = req.body.content.toString().replace('\r\n', ' ')
+        
+        var content = '<br /><b>Server:</b> ' + req.body.server + '<br/><b>World:</b> ' + req.body.world;
+        content = content + '<br /><b>X:</b> ' + req.body.x + ' <b>Y:</b> ' + req.body.y + ' <b>Z:</b> ' + req.body.z
+        content = content + '<br /><b>Players with warp: </b>' + req.body.players.toString().replace('\r\n', ' ');
+        content = content + '<br /><b>Details:</b> ' + req.body.details.toString().replace('\r\n', ' ');
         db.tickets.insert({
             'user': req.session.username,
             'ticketName': req.body.ticketName,
@@ -66,6 +70,7 @@ module.exports = function(app, db) {
             res.redirect('/tickets');
         });
     });
+
     app.post('/ticketComment', function(req, res) {
         db.users.find({
             'name': req.session.username,

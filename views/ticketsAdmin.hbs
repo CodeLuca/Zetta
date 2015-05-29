@@ -53,7 +53,7 @@
                     <h3 class="inline" style="color:#62CEFF;">Status: </h3>
                     <h3 class="inline" id="tStatus"></h2><br>
                     <h3 class="inline" style="color:#62CEFF;">Content: </h3>
-                    <h3 class="inline" id="tContent"></h2><br><br>
+                    <h3 class="inline" class="content" id="tContent"></h2><br><br>
                     <h3 class="inline" style="color:#62CEFF;">Comments: </h3>
                     <p class="inline" id="tComments"></p><br>
                     <br><br>
@@ -67,6 +67,8 @@
                     <br><input type="submit" onclick="submit()">
                 </center>
             </div>
+            <br>
+            <p>N.B: To delete a ticket: just set the status to closed and press submit.</p>
         </div>
     </div>
 </div>
@@ -174,7 +176,7 @@
             $('#tType').text(type)
             $('#tTime').text(time)
             $('#tStatus').text(status)
-            $('#tContent').text(content)
+            $('#tContent').html(content)
             var com = '';
             guser = user,
             gname = name,

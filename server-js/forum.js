@@ -6,9 +6,26 @@ module.exports = function(app, db) {
                 docs.sort(function(a, b) {
                     return parseInt(b.votes) - parseInt(a.votes);
                 });
-                res.render('forum', {
-                    layout: 'main',
-                    threads: docs
+                db.users.find({
+                    'name': req.session.username
+                }, function(err, data){
+                    if(!data[0].perms){
+                        res.render('forum', {
+                            layout: 'main',
+                            threads: docs,
+                            sitePlayer: req.session.username,
+                            code: data[0].secret,
+                            aT: 'false'
+                        });
+                    } else {
+                        res.render('forum', {
+                            layout: 'main',
+                            threads: docs,
+                            sitePlayer: req.session.username,
+                            code: data[0].secret,
+                            aT: 'true'
+                        });
+                    }
                 });
             });
         }
@@ -24,6 +41,28 @@ module.exports = function(app, db) {
                 layout: 'main'
             });
         }
+    });
+    app.post('/delthread', function(req, res){
+        if (!req.session.username){
+            res.redirect('/login');
+            return;
+        }
+        db.users.find({'name': req.body.user}, function(err, docs){
+            if(!docs[0] || (docs[0].secret != req.body.secret)){
+                res.send('401');
+            } else {
+                pass();
+            }
+            function pass(){
+                console.log(JSON.stringify(req.body));
+                db.threads.remove({
+                    'name': req.body.name,
+                    'votes': parseInt(req.body.votes),
+                    'content': req.body.content
+                });
+                res.send(200);
+            }
+        });
     });
     //New Thread Post Request. Such fun.
     app.post('/newthread', function(req, res) {
@@ -41,7 +80,7 @@ module.exports = function(app, db) {
             //Time since last post
             var time = Date.now() - docs[0].cooldown;
             //Check for cooldown
-            if (time < (60000 * 60) && docs[0].cooldown != 0) {
+            if (time < (60000) && docs[0].cooldown != 0) {
                 //if there is a cooldown show them the Forums page with error.
                 db.threads.find(function(err, docs) {
                     docs.sort(function(a, b) {
@@ -50,7 +89,7 @@ module.exports = function(app, db) {
                     res.render('forum', {
                         layout: 'main',
                         threads: docs,
-                        err: 'You can only post a thread every 60 minutes, this is to prevent spam. Please wait for the cooldown to wear off.'
+                        err: 'You can only post a thread every 60 seconds, this is to prevent spam. Please wait for the cooldown to wear off.'
                     });
                 });
                 return;
@@ -73,12 +112,13 @@ module.exports = function(app, db) {
                     }
                 });
                 //If there is no cooldown let them make a post!
+                var content = req.body.content.replace(/(?:\r\n|\r|\n)/g, '<br />');
                 function post() {
                     var obj = {
                         name: req.body.title,
                         user: req.session.username,
                         votes: 0,
-                        content: req.body.content,
+                        content: content,
                         date: Date.now(),
                         comments: []
                     };
@@ -108,7 +148,7 @@ module.exports = function(app, db) {
                             $push: {
                                 "recent": {
                                     "post": req.body.title,
-                                    "time": time
+                                    "type": 'Create'
                                 }
                             }
                         })
@@ -146,6 +186,17 @@ module.exports = function(app, db) {
                 res.send();
                 return;
             } else {
+                db.users.update({
+                    'name': req.session.username
+                }, {
+                    $push: {
+                        "recent": {
+                            "post": req.body.name,
+                            "type": "Vote"
+                        }
+                    }
+                });
+
                 if (req.body.type == 'up') {
                     db.users.update({
                         "name": req.session.username

@@ -1,0 +1,59 @@
+<!-- 
+    Menu button 
+-->
+<div id="page-content-wrapper">
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/login.css"> -->
+                <link rel="stylesheet" type="text/css" href="/css/main.css">
+<div class="container">
+    <div class="push-down center">
+            <a href="/home"><img src="/resources/image/header.jpg" style="width:100%"></a><br><br><br>
+            <img onclick="adv()" style="margin-left:-50px;"src="/resources/image/apvp.png">
+            <img onclick="elite()" style="margin-left:-73px;"src="/resources/image/ekits.png"></h3>
+            <br><br>
+            <iframe frameborder="0" allowtransparency="true" scrolling="no" id="frame" src="http://donate.advancedpvp.com" style="width: 100%; height: 150%; margin-bottom: 20px; display: block;"></iframe>
+        </header>
+    </div>
+      
+    </div> 
+</div>
+</div>
+
+<style>
+    img {
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        opacity: 1; 
+    }
+
+    img:hover {
+        opacity: 0.5; 
+        cursor: pointer;
+    }
+</style>
+<!--
+    JQuery
+-->
+<script>
+function elite(){
+    $('#frame').fadeOut('slow');
+    $('#frame').fadeIn('slow');
+    $("#frame").attr("src", "http://elitekits.buycraft.net/");
+}
+
+function adv(){
+    $('#frame').fadeOut('slow');
+    $('#frame').fadeIn('slow');
+    $("#frame").attr("src", "http://donate.advancedpvp.com");
+}
+
+$(function(){
+    $( "#wrapper" ).addClass( "toggled" );
+});
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+</script>
