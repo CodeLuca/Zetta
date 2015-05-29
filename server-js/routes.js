@@ -1,4 +1,4 @@
-module.exports = function(app, db) {
+module.exports = function(app, db, db2, db3) {
     app.get('/servers', function(req, res){
         if(!req.session.username){
             res.redirect('/login')
@@ -46,15 +46,31 @@ module.exports = function(app, db) {
                     res.rediect('/logout');
                     return;
                 }
-                var a = docs[0].recent.slice(0, 4);
-                var amount = docs[0].threads.length + 1;
-                res.render('stats', {
-                    'layout': 'main',
-                    'recent': a,
-                    'postAmount': amount,
-                    'voteAmount': docs[0].votes.length,
-                    'name': req.params.name
-                })
+                var dateJoined, logins, bal, team;
+                db2.profile.find({
+                    'currentName': req.session.username
+                }, function(err, data){
+                    dateJoined = data[0].createDate,
+                    logins = data[0].logins;
+
+                    db3.profiles.find({
+                        'name': req.session.username
+                    }, function(err, docs2){
+                        bal = docs2[0].balance
+                        var a = docs[0].recent.slice(0, 4);
+                        var amount = docs[0].threads.length;
+                        res.render('stats', {
+                            'layout': 'main',
+                            'recent': a,
+                            'logins': logins,
+                            'dateJoined': dateJoined,
+                            'bal': bal.toString(),
+                            'postAmount': amount,
+                            'voteAmount': docs[0].votes.length,
+                            'name': req.params.name
+                        })
+                    });
+                });
             });
         }
     });
@@ -74,7 +90,7 @@ module.exports = function(app, db) {
         var user = req.body.username;
         var pass = req.body.password;
         var temp;
-        db.profile.find({
+        db2.profile.find({
             currentName: user
         }, function(err, docs) {
             if (typeof docs[0] !== 'undefined') {

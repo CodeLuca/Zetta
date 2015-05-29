@@ -2,7 +2,8 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var app = express()
 var mongojs = require('mongojs');
-// var db = mongojs('mongodb://192.99.46.113:27017/pure', ['profile', 'threads', 'users']);
+var db2 = mongojs('mongodb://192.99.200.191:27017/pure', ['profile']);
+var db3 = mongojs('mongodb://192.99.200.191:27017/legacy', ['profiles']);
 var db = mongojs('mongodb://localhost:27017/pure', ['applications', 'profile', 'threads', 'users', 'tickets']);
 var request = require("request");
 var bcrypt = require('bcrypt');
@@ -24,7 +25,7 @@ app.enable('trust proxy');
 require('./server-js/apply')(app, db, io);
 require('./server-js/thread')(app, db, io);
 require('./server-js/tickets')(app, db /*factions*/);
-require('./server-js/routes')(app, db /*factions*/);
+require('./server-js/routes')(app, db, db2, db3);
 require('./server-js/forum')(app, db /*factions*/);
 
 app.get('/', function(req, res){
@@ -43,4 +44,4 @@ app.get('*', function(req, res){
   res.send('<h2 style="font-family: arial; text-align: center; color: #890000">Page not found. <br>I know... It is fustrating. 	ლ(ಠ益ಠლ)', 404);
 });
 
-http.listen(3000);
+http.listen(80);
