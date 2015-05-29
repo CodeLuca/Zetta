@@ -50,13 +50,21 @@ module.exports = function(app, db, db2, db3) {
                 db2.profile.find({
                     'currentName': req.session.username
                 }, function(err, data){
-                    dateJoined = data[0].createDate,
-                    logins = data[0].logins;
-
+                    if(data[0]){
+                        dateJoined = data[0].createDate,
+                        logins = data[0].logins;
+                    } else {
+                        dateJoined = 'today',
+                        logins = 1;
+                    }
                     db3.profiles.find({
                         'name': req.session.username
                     }, function(err, docs2){
-                        bal = docs2[0].balance
+                        if(docs2[0]){
+                            bal = docs2[0].balance
+                        } else {
+                            bal = 0;
+                        }
                         var a = docs[0].recent.slice(0, 4);
                         var amount = docs[0].threads.length;
                         res.render('stats', {
