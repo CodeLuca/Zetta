@@ -13,6 +13,13 @@ module.exports = function(app, db, db2, db3) {
         }
         res.render('buy');
     });
+    app.get('/staff', function(req, res){
+        if(!req.session.username){
+            res.redirect('/login')
+            return;
+        }
+        res.render('staff');
+    });
     app.get('/stats', function(req, res) {
         var kills, deaths, faction;
         if (!req.session.username) {
