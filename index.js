@@ -4,7 +4,7 @@ var app = express()
 var mongojs = require('mongojs');
 var db2 = mongojs('mongodb://192.99.200.191:27017/pure', ['profile']);
 var db3 = mongojs('mongodb://192.99.200.191:27017/legacy', ['profiles']);
-var db = mongojs('mongodb://localhost:27017/pure', ['applications', 'profile', 'threads', 'users', 'tickets']);
+var db = mongojs('mongodb://localhost:27017/pure', ['applications', 'profile', 'threads', 'users', 'tickets', 'bugs']);
 var request = require("request");
 var bcrypt = require('bcrypt');
 var session = require('express-session')
@@ -22,6 +22,7 @@ app.use(session({secret: '1234567890QWERTY'}));
 app.enable('trust proxy');
 
 //Routes
+require('./server-js/bugs')(app, db, io);
 require('./server-js/apply')(app, db, io);
 require('./server-js/thread')(app, db, io);
 require('./server-js/tickets')(app, db /*factions*/);
@@ -41,7 +42,7 @@ app.get('/home', function(req, res){
 });
 //404 Page
 app.get('*', function(req, res){
-  res.send('<h2 style="font-family: arial; text-align: center; color: #890000">Page not found. <br>I know... It is fustrating. 	ლ(ಠ益ಠლ)', 404);
+  res.send('<h2 style="font-family: arial; text-align: center; color: #890000">Page not found. <br>I know... It is frustrating. 	ლ(ಠ益ಠლ)', 404);
 });
 
 http.listen(80);

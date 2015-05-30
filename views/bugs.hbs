@@ -1,0 +1,115 @@
+<!-- 
+    Menu button 
+-->
+<div id="page-content-wrapper">
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+    <!-- <link rel="stylesheet" type="text/css" href="/css/login.css"> -->
+                <link rel="stylesheet" type="text/css" href="/css/main.css">
+<div class="container">
+    <div class="push-down center">
+        <header class="main-content container">
+                <h1>Bug Reports</h1>
+                <br>
+                <font size="6" color="#87AAB1">A Selected Amount of New Bug Reports will Recieve Prizes.</font>
+                <br>
+                <br>
+                <div id="moderator">
+                    <form action="/newBug" method="POST" >
+                        <b style="color: #C0BFBA">Player</b>: {{user}}<br><br>
+                        <input style="display: none" name="code" value="{{code}}">
+                        Bug Name: <br><input name="bugName">
+                        <input style="display: none" name="type" value="moderator"><br><br>
+                        Server:<br> <select name="server">
+                          <option value="AdvancedPvP" selected>AdvancedPvP</option>
+                          <option value="EliteKits">EliteKits</option>
+                          <option value="PracticePots">PracticePots</option>
+                          <option value="MC-HCF">MCHCF</option>
+                        </select><br><br>
+                        Bug information: <br> <textarea name="info"></textarea><br><br>
+                        How you found the bug / How to replicate it: <br> <textarea name="how"></textarea><br><br>
+                        <input type="submit" style="text-align: left;">
+                    </form>
+                </div>
+            </header>
+        </div>
+    </div> 
+</div>
+</div>
+<style>
+input,input[type="number"], textarea, select, button {
+  width : 100%;
+  margin: 3px;
+
+  -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+     -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+          box-sizing: border-box;
+}
+    ::-webkit-input-placeholder {
+       color: #40453F;
+    }
+
+    :-moz-placeholder { /* Firefox 18- */
+       color: #40453F;  
+    }
+
+    ::-moz-placeholder {  /* Firefox 19+ */
+       color: #40453F;  
+    }
+
+    :-ms-input-placeholder {  
+       color: #40453F;  
+    }
+
+    img {
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+        opacity: 1; 
+    }
+
+    img:hover {
+        opacity: 0.5; 
+        cursor: pointer;
+    }
+    #youtuber, #moderator {
+        text-align: left;
+        color: #fff;
+    }
+</style>
+
+<!--
+    JQuery
+-->
+<script>
+yt = false;
+mod = false;
+function youtube(){
+    if(yt == false){
+        $( '#moderator' ).fadeOut( "fast" )
+        $( "#youtuber" ).fadeIn( "slow" );
+        yt = true;
+        mod = false;
+    } else {
+        $('#youtuber').fadeOut( "slow" )
+        yt = false;
+    }
+}
+
+function moderator(){
+    if(mod == false){
+        $( '#youtuber' ).fadeOut( "fast" )
+        $( "#moderator" ).fadeIn( "slow" );
+        mod = true;
+        yt = false;
+    } else {
+        $('#moderator').fadeOut( "slow" )
+        mod = false;
+    }
+}
+
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+</script>

@@ -1,0 +1,164 @@
+<!--
+                Menu button
+-->
+<div id="page-content-wrapper">
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--
+                                    Page Content
+    -->
+    <div class="container">
+        <div class="push-down center">
+            <header class="main-content container">
+                <div id="d" style="display:none">
+                    <div id="p">{{sitePlayer}}</div>
+                    <div id="code">{{code}}</div>
+                </div>
+                <center>
+                <h1>Admin Bugs Panel</h1>
+                <br>
+                <h3 style="color: #BB0900">{{err}}</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Bug Name</th>
+                            <th>Server</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each bugs}}
+                        <tr onclick='view("{{bugName}}", "{{user}}", "{{server}}", "{{info}}", "{{how}}", "{{date}}")'>
+                            <td>{{user}}</td>
+                            <td>{{bugName}}</td>
+                            <td>{{server}}</td>
+                            <td>{{date}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                </center>
+                <div class="viewer" style="text-align: left; display:none;">
+                    <br>
+                    <h3 class="inline" style="color:#62CEFF;">Bug Name: </h3>
+                    <h3 class="inline" id="tBugName"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">User: </h3>
+                    <h3 class="inline" id="tUser"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">Server: </h3>
+                    <h3 class="inline" id="tServer"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">Information: </h3>
+                    <h3 class="inline" id="tInfo"></h2><br>
+                    <h3 class="inline" style="color:#62CEFF;">Replication Info: </h3>
+                    <h3 class="inline" class="content" id="tHow"></h2><br><br>
+                    <h3 class="inline" style="color:#62CEFF;">Date: </h3>
+                    <p class="inline" id="tDate"></p><br>
+                    <br>
+                    <center>
+                    <br><input type="submit" value="Seen Bug and Working on it!" onclick="seen()">
+                </center>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+</div>
+<style>
+    /*Responsive table*/
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #34495e;
+    color: #f3f3f3;
+    }
+    tr {
+    cursor: pointer;
+    }
+    tr:hover {
+        -webkit-transition: all 0.2s;
+        color: #212F3F;
+    }
+    th:hover {
+        -webkit-transition: all 0.3s;
+        color: #fff;
+    }
+    td, th {
+    padding: 8px;
+    text-align: left;
+    }
+    /* Zebra striping */
+    tr:nth-of-type(odd) {
+    background: #16a085;
+    }
+    th {
+    background: #2c3e50;
+    font-weight: bold;
+    }
+    /* Extras */
+    .button-3d {
+    position:relative;
+    width: auto;
+    color:#ecf0f1;
+    text-decoration:none;
+    border-radius:5px;
+    border:solid 1px #f39c12;
+    background:#e67e22;
+    text-align:center;
+    padding:8px 18px 6px;
+    margin: 6px;
+    float: right;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    transition: all 0.1s;
+    -webkit-box-shadow: 0px 4px 0px #d35400;
+    -moz-box-shadow: 0px 4px 0px #d35400;
+    box-shadow: 0px 4px 0px #d35400;
+    }
+    .button-3d:active{
+    -webkit-box-shadow: 0px 2px 0px #d35400;
+    -moz-box-shadow: 0px 2px 0px #d35400;
+    box-shadow: 0px 2px 0px #d35400;
+    position:relative;
+    top:2px;
+    }
+</style>
+<!--
+                        JQuery
+-->
+<script>
+    var gPlayer;
+
+        function seen(){
+            $.post('/newAlert', {
+                'msg': 'A bug report of yours has been seen!',
+                'player': gPlayer
+            }, function(data){
+                location.reload();
+            });
+        }
+
+        function view(bugName, user, server, info, how, date) {
+            $('#tBugName').text(bugName);
+            $('#tUser').text(user)
+            $('#tServer').text(server)
+            $('#tInfo').text(info)
+            $('#tHow').text(how)
+            $('#tDate').text(date)
+            gPlayer = user;
+            $('.viewer').fadeIn("slow");
+            }
+            var shown = false;
+            function show(){
+                if(shown == false){
+                    $( "#new" ).slideDown( "slow" );
+                    shown = true;
+                } else {
+                    $('#new').slideUp( "slow" )
+                    shown = false;
+                }
+            }
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+</script>

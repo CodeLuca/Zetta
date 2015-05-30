@@ -35,11 +35,13 @@ module.exports = function(app, db) {
                     }
 
                     function three() {
+                        console.log('Mod: ' + JSON.stringify(mod))
+                        console.log('yt: ' + JSON.stringify(yt))
                         res.render('applyAdmin', {
                             'user': req.session.username,
                             'code': docs[0].secret,
-                            'moderator': mod,
-                            'youtuber': yt
+                            'moderator': JSON.parse(mod),
+                            'youtuber': JSON.parse(yt)
                         });
                     }
                 }

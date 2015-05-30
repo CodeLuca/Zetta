@@ -2,6 +2,8 @@
 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars fa-2x"></i></a>
 <div class="container">
     <div class="push-down center">
+        <marquee behavior="scroll" direction="left" style="color: #189FD6"><b style="color: #D70011">Alerts: </b>{{#each alerts}}{{msg}} - {{/each}}</marquee>
+        <br><br>
         <header>
             <!--May need Php to determine the avatar-->
             <img src="https://mcapi.ca/avatar/2d/{{name}}" alt="">

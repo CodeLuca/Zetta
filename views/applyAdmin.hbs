@@ -91,6 +91,7 @@
                     <h3 class="inline" style="color:#62CEFF;">Status: </h3>
                     <h3 class="inline" id="tStatus"></h3><br>
 
+                    <br><input type="submit" value="Seen Application" onclick="seen()">
                     <br>
             </div>
 
@@ -111,6 +112,8 @@
 
                     <h3 class="inline" style="color:#62CEFF;">Status: </h3>
                     <h3 class="inline" id="yStatus"></h3><br>
+
+                    <br><input type="submit" value="Seen Application" onclick="seen()">
                 </div>
             <br>
         </div>
@@ -181,6 +184,16 @@
 -->
 <script>
     var cArray, guser, gname, gdate, gcontent;
+    var gPlayer;
+
+        function seen(){
+            $.post('/newAlert', {
+                'msg': 'An application of yours has now been seen by an admin!',
+                'player': gPlayer
+            }, function(data){
+                location.reload();
+            });
+        }
 
         function view(user, server, age, timezone, skype, activity, experience, info, date, status) {
             $('#tUser').text(user);
@@ -194,6 +207,8 @@
             $('#tStatus').text(status)
             $('.viewer').fadeIn('slow');
             $('.viewYT').fadeOut('slow');
+
+            gPlayer = user;
             }
 
         function viewYT(user, channel, link, type, date, status) {
@@ -204,6 +219,8 @@
             $('#yStatus').text(status)
             $('.viewYT').fadeIn('slow');
             $('.viewer').fadeOut('slow');
+
+            gPlayer = user;
             }
             var shown = false;
             function show(){

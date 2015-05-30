@@ -1,4 +1,21 @@
 module.exports = function(app, db, db2, db3) {
+    app.post('/newAlert', function(req, res){
+        if(!req.session.username){
+            res.redirect('/login')
+            return;
+        }
+        db.users.update({
+            'name': req.body.player
+        }, {
+            $push: {
+                "alerts": {
+                    'msg': req.body.msg,
+                    'date': Date.now()
+                }
+            }
+        })
+        res.send(200);
+    });
     app.get('/servers', function(req, res){
         if(!req.session.username){
             res.redirect('/login')
@@ -41,6 +58,7 @@ module.exports = function(app, db, db2, db3) {
         }
     });
     app.get('/profile/:name', function(req, res) {
+        var dateJoined, logins, bal, team, alerts;
         var kills, deaths, faction;
         if (!req.session.username) {
             res.redirect('/login')
@@ -53,9 +71,9 @@ module.exports = function(app, db, db2, db3) {
                     res.rediect('/logout');
                     return;
                 }
-                var dateJoined, logins, bal, team;
+                alerts = docs[0].alerts;
                 db2.profile.find({
-                    'currentName': req.session.username
+                    'currentName': req.params.name
                 }, function(err, data){
                     if(data[0]){
                         dateJoined = data[0].createDate,
@@ -65,7 +83,7 @@ module.exports = function(app, db, db2, db3) {
                         logins = 1;
                     }
                     db3.profiles.find({
-                        'name': req.session.username
+                        'name': req.params.name
                     }, function(err, docs2){
                         if(docs2[0]){
                             bal = docs2[0].balance
@@ -74,16 +92,30 @@ module.exports = function(app, db, db2, db3) {
                         }
                         var a = docs[0].recent.slice(0, 4);
                         var amount = docs[0].threads.length;
-                        res.render('stats', {
-                            'layout': 'main',
-                            'recent': a,
-                            'logins': logins,
-                            'dateJoined': dateJoined,
-                            'bal': bal.toString(),
-                            'postAmount': amount,
-                            'voteAmount': docs[0].votes.length,
-                            'name': req.params.name
-                        })
+                        if(req.params.name == req.session.username){
+                            res.render('stats', {
+                                'alerts': alerts,
+                                'layout': 'main',
+                                'recent': a,
+                                'logins': logins,
+                                'dateJoined': dateJoined,
+                                'bal': bal.toString(),
+                                'postAmount': amount,
+                                'voteAmount': docs[0].votes.length,
+                                'name': req.params.name
+                            })
+                        } else {
+                            res.render('stats', {
+                                'layout': 'main',
+                                'recent': a,
+                                'logins': logins,
+                                'dateJoined': dateJoined,
+                                'bal': bal.toString(),
+                                'postAmount': amount,
+                                'voteAmount': docs[0].votes.length,
+                                'name': req.params.name
+                            })
+                        }
                     });
                 });
             });
@@ -133,7 +165,7 @@ module.exports = function(app, db, db2, db3) {
                         }
                         console.log(secret);
                         if(!data[0]){
-                            db.users.insert({name: user, threads: [], recent: [], votes: [] , cooldownStart: 0, 'secret': secret}, function(){
+                            db.users.insert({name: user, alerts: [], threads: [], recent: [], votes: [] , cooldownStart: 0, 'secret': secret}, function(){
                                 console.log(user + ' Logged in.');
                                 res.redirect('/stats')
                                 return;
