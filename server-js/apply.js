@@ -21,7 +21,7 @@ module.exports = function(app, db) {
                     db.applications.find({
                         'type': 'moderator'
                     }, function(err, data) {
-                        mod = data;
+                        mod = JSON.stringify(data).replace('\r\n', '<br>');
                         two();
                     });
 
@@ -29,7 +29,7 @@ module.exports = function(app, db) {
                         db.applications.find({
                             'type': 'youtuber'
                         }, function(err, data) {
-                            yt = data;
+                            yt = JSON.stringify(data).replace('\r\n', '<br>');
                             three();
                         });
                     }
