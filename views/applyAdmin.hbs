@@ -29,7 +29,9 @@
                     </thead>
                     <tbody>
                         {{#each moderator}}
-                        <tr onclick='view("{{user}}", "{{server}}", "{{age}}", "{{timezone}}", "{{skype}}", "{{activity}}", "{{experience}}", "{{info}}", "{{date}}", "{{status}}")'>
+                        <tr onclick='view("{{user}}", "{{server}}", "{{age}}", "{{timezone}}", "{{skype}}", "{{activity}}", "{{date}}", "{{status}}")'>
+                            <p style="display:none;" id="e{{skype}}">{{experience}}</p>
+                            <p style="display:none;" id="i{{skype}}">{{info}}</p>
                             <td>{{user}}</td>
                             <td>{{date}}</td>
                             <td>{{status}}</td>
@@ -195,14 +197,14 @@
             });
         }
 
-        function view(user, server, age, timezone, skype, activity, experience, info, date, status) {
+        function view(user, server, age, timezone, skype, activity, date, status) {
             $('#tUser').text(user);
             $('#tServer').text(server)
             $('#tage').text(age)
             $('#tTimezone').text(timezone)
             $('#tSkype').text(skype)
-            $('#tExperience').text(experience)
-            $('#tInfo').text(info)
+            $('#tExperience').text($('#e' + skype).text())
+            $('#tInfo').text($('#i' + skype).text())
             $('#tDate').text(date)
             $('#tStatus').text(status)
             $('.viewer').fadeIn('slow');
