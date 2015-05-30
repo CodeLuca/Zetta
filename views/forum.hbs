@@ -1,3 +1,8 @@
+<style type="text/css">
+    .thread {
+        overflow: auto;
+    }
+</style>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
@@ -11,32 +16,34 @@
                 <div id="aT">{{aT}}</div>
             </div>
             <center>
-                <h1 style="color: #58CDB3">Forums</h1>
-                <h3>{{err}}</h3>
-                 <br>
-                    {{#each threads}}
-                    <div class="thread">
-                        <a style="color: #00A6DF" href="/view/{{name}}&{{user}}">{{name}}</a>
-                        <b class="aB aDel" style="display:none;" onclick='del("{{name}}", "{{votes}}", "{{content}}")'>Delete</b>
-                        <img id="{{name}}" class="down" align="right" src="/resources/image/down.png" width="15" style="  margin-right: 10px;">
-                        <img id="{{name}}" class="up" align="right" src="/resources/image/up.png" width="15" style="  margin-right: 3px;">
-                        <b id="amount" class="right">{{votes}}</b>
-                 </div>
-                 {{/each}}
+            <h1 style="color: #58CDB3">Forums</h1>
+            <h3>{{err}}</h3>
+            <br>
+            {{#each threads}}
+            <div class="thread">
+                <div style="display: inline; float: left; height: 100%;">
+                    <img id="{{name}}" class="down" align="right" src="/resources/image/down.png" width="15" style="  margin-right: 10px;">
+                    <img id="{{name}}" class="up" align="right" src="/resources/image/up.png" width="15" style="  margin-right: 3px;">
+                    <b id="amount" class="right">{{votes}}</b>
+                </div>
+                <div style="display: inline;">
+                    <a style="color: #00A6DF" href="/view/{{name}}&{{user}}">{{name}} <b style="color: #39B08C">Creator:</b> <b style="color: #00FEBF">{{user}}</b></a>
+                    <b class="aB aDel" style="display:none;" onclick='del("{{name}}", "{{votes}}", "{{content}}")'>Delete</b>
+                </div>
             </div>
+            {{/each}}
+        </div>
         </center>
         <br>
         <a href="/newthread"><button>New Thread</button></a>
     </div>
-</div>    
-
+</div>
 <script>
 $(function(){
     if($('#aT').text() == "true"){
         $('.aB').fadeIn("slow");
     }
 });
-
 function del(name, votes, content){
     var x;
     if (confirm("Are you sure you want to delete this post?") == true) {
@@ -57,7 +64,6 @@ function del(name, votes, content){
         x = "You pressed Cancel!";
     }
 }
-
 $('.up').click(function(e){
     var id = $(this).attr('id');
     var obj = {name: id, type: 'up'};
@@ -65,7 +71,6 @@ $('.up').click(function(e){
         location.reload();
     });
 });
-
 $('.down').click(function(e){
     var id = $(this).attr('id');
     var obj = {name: id, type: 'down'};
@@ -73,7 +78,6 @@ $('.down').click(function(e){
         location.reload();
     });
 });
-
 $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");

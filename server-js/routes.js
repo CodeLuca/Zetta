@@ -6,7 +6,7 @@ module.exports = function(app, db, db2, db3) {
         }
         res.render('servers');
     });
-    app.get('/buy', function(req, res){
+    app.get('/store', function(req, res){
         if(!req.session.username){
             res.redirect('/login')
             return;

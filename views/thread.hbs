@@ -11,12 +11,15 @@
               Current Account: <div id="siteUsername" style="display: none; color:#C5900A">{{siteUser}} <div id="rank" style="display: none; color:##B11200">{{rank}}</div></div>
             </div>
             <br>
+            <font color="#FFF" size="5">Votes: {{votes}}</font><br><br>
             <div class="viewThread">
+                <img src="/resources/image/upa.png" class="up">
                 <a href="/profile/{{user}}">
                 <div class="player">
                     <img width="75" src="https://mcapi.ca/avatar/2d/{{user}}"><br>
                     {{user}}
                 </div></a>
+                <img src="/resources/image/downa.png" class="down">
                 </a>
                 <h1 style="color: #02B1EE" id="name">{{name}}</h1>
                 <br>
@@ -45,7 +48,18 @@
 </div>
 <div id="code" style="display: none">{{code}}</div>
 
-<script src="http://localhost/socket.io/socket.io.js"></script>
+<script src="http://www.breakmc.com/socket.io/socket.io.js"></script>
+
+<style>
+  img:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+</style>
 
 <script>
 var socket = io();
@@ -81,5 +95,19 @@ function chat(){
 $("#").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
+});
+$('.up').click(function(e){
+    var id = '{{name}}';
+    var obj = {name: id, type: 'up'};
+    $.post('/vote', obj, function(data){
+        location.reload();
+    });
+});
+$('.down').click(function(e){
+    var id = '{{name}}';
+    var obj = {name: id, type: 'down'};
+    $.post('/vote', obj, function(data){
+        location.reload();
+    });
 });
 </script>

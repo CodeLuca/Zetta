@@ -38,6 +38,7 @@ module.exports = function(app, db, io) {
                 "name": name,
                 'user': docs[0].user,
                 content: docs[0].content,
+                'votes': docs[0].votes,
                 siteUser: req.session.username,
                 comments: com,
                 'code': code,
