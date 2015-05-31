@@ -158,8 +158,9 @@
             $('#tBugName').text(bugName);
             $('#tUser').text(user)
             $('#tServer').text(server)
-            $('#tInfo').text($('#i' + bugName).text())
-            $('#tHow').text($('#h' + bugName).text())
+            $('#tInfo').text($("[id='i" + bugName +"']").text())
+            // $('#tInfo').text($('#i' + bugName).text())
+            $('#tHow').text($("[id='h" + bugName +"']").text())
             $('#tDate').text(date)
             gPlayer = user,
             gBugName = bugName;
