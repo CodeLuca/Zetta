@@ -24,7 +24,7 @@
                             <th>Player</th>
                             <th>Bug Name</th>
                             <th>Server</th>
-                            <th>Date</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +33,7 @@
                             <td>{{user}}</td>
                             <td>{{bugName}}</td>
                             <td>{{server}}</td>
-                            <td>{{date}}</td>
+                            <td>{{status}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -55,7 +55,8 @@
                     <p class="inline" id="tDate"></p><br>
                     <br>
                     <center>
-                    <br><input type="submit" value="Seen Bug and Working on it!" onclick="seen()">
+                    <br><input type="submit" value="Seen Bug and Working on it!" onclick="seen()"><br><br>
+                    <input type="submit" value="Finished / Declined Bug" onclick="d()">
                 </center>
             </div>
             <br>
@@ -126,14 +127,28 @@
                         JQuery
 -->
 <script>
-    var gPlayer;
-
-        function seen(){
-            $.post('/newAlert', {
-                'msg': 'A bug report of yours has been seen!',
-                'player': gPlayer
+    var gPlayer, gBugName;
+        function d(){
+            $.post('/deleteBug', {
+                'bugName': gBugName,
+                'user': gPlayer
             }, function(data){
                 location.reload();
+            });
+        }
+
+        function seen(){
+            $.post('/setBug', {
+                'bugName': gBugName,
+                'user': gPlayer,
+                'status': 'In progress' 
+            }, function(l){
+                $.post('/newAlert', {
+                    'msg': 'A bug report of yours has been seen!',
+                    'player': gPlayer
+                }, function(data){
+                    location.reload();
+                });
             });
         }
 
@@ -144,7 +159,8 @@
             $('#tInfo').text(info)
             $('#tHow').text(how)
             $('#tDate').text(date)
-            gPlayer = user;
+            gPlayer = user,
+            gBugName = bugName;
             $('.viewer').fadeIn("slow");
             }
             var shown = false;

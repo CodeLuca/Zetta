@@ -32,7 +32,32 @@ module.exports = function(app, db){
 			});
 		}
 	});	
-
+	app.post('/deleteBug', function(req, res){
+		if(!req.session.username){
+			res.redirect('/login');
+			return;
+		}
+		db.bugs.remove({
+			'bugName': req.body.bugName,
+			'user': req.body.user
+		});
+		res.send(200);
+	});
+	app.post('/setBug', function(req, res){
+		if(!req.session.username){
+			res.redirect('/login');
+			return;
+		}
+		db.bugs.update({
+			'bugName': req.body.bugName,
+			'user': req.body.user
+		}, {
+			$set: {
+				'status': req.body.status
+			}
+		})
+		res.sendStatus(200);
+	});
 	app.post('/newBug', function(req, res){
 		if(!req.session.username){
 			res.redirect('/login');
@@ -55,6 +80,7 @@ module.exports = function(app, db){
 					'server': req.body.server,
 					'info': req.body.info,
 					'how': req.body.how,
+					'status': 'Unseen',
 					'date': time
 				}
 				db.bugs.insert(obj)
