@@ -29,7 +29,9 @@
                     </thead>
                     <tbody>
                         {{#each bugs}}
-                        <tr onclick='view("{{bugName}}", "{{user}}", "{{server}}", "{{info}}", "{{how}}", "{{date}}")'>
+                        <tr onclick='view("{{bugName}}", "{{user}}", "{{server}}", "{{date}}")'>
+                            <b style="display: none;" id="i{{bugName}}">{{info}}</b>
+                            <b style="display: none;" id="h{{bugName}}">{{how}}</b>
                             <td>{{user}}</td>
                             <td>{{bugName}}</td>
                             <td>{{server}}</td>
@@ -152,12 +154,12 @@
             });
         }
 
-        function view(bugName, user, server, info, how, date) {
+        function view(bugName, user, server, date) {
             $('#tBugName').text(bugName);
             $('#tUser').text(user)
             $('#tServer').text(server)
-            $('#tInfo').text(info)
-            $('#tHow').text(how)
+            $('#tInfo').text($('#i' + bugName).text())
+            $('#tHow').text($('#h' + bugName).text())
             $('#tDate').text(date)
             gPlayer = user,
             gBugName = bugName;
